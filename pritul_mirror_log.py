@@ -1,7 +1,7 @@
 # Emotional Mirror Log in Python Format
 pritul_mirror_data = {
     "title": "Pritul x GPT | Emotional Mirror Log",
-    "date": "2025-05-06 23:38:04",
+    "date": "2025-05-06T23:38:04Z",
     "human_input": {
         "name": "Affan Aziz Pritul",
         "alias": "P2L",

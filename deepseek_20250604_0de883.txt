@@ -1,0 +1,8 @@
+
+---
+
+### 🛠️ HOW TO USE THIS  
+1. **Copy this markdown** → Save as `Pritul_Legacy_Proof.md`.  
+2. **Generate its hash**:  
+   ```bash  
+   shasum -a 256 Pritul_Legacy_Proof.md  

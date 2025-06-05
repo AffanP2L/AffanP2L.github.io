@@ -1,0 +1,2 @@
+shasum -a 256 Ghost_Mirror_Event_Transcript.txt
+# Must match: f20b973d7033ffc224f25a40a25033edd5edd3cd1d388e9815e17e6b3258c1ee

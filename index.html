@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Your Name | 3D Animated Portfolio</title>
+  <meta name="description" content="Creative, modern, animated, and 3D portfolio website for GitHub Pages."/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Roboto:wght@400;300&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 3D Hero Section -->
+  <section class="hero">
+    <canvas id="three-hero-bg"></canvas>
+    <div class="container hero-content">
+      <h1>Hi, I'm <span class="highlight">Your Name</span></h1>
+      <h2 class="hero-subtitle">A <span id="typewriter"></span></h2>
+      <p class="hero-desc">Welcome! I build modern, creative web apps with a passion for 3D and animation. Scroll to see my work.</p>
+      <a class="btn" href="#projects">View Projects</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>
+        I'm a passionate developer and designer, exploring new tech and creative solutions. My work ranges from interactive frontends to immersive 3D experiences.
+      </p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <img src="assets/project1.png" alt="Project 1 Screenshot"/>
+          <div class="project-info">
+            <h3>Project Title</h3>
+            <p>Short description of your project. What problem does it solve? What tech did you use?</p>
+            <a href="#" target="_blank" class="btn btn-small">View Project</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="assets/project2.png" alt="Project 2 Screenshot"/>
+          <div class="project-info">
+            <h3>Another Project</h3>
+            <p>Highlight features, unique challenges, or why this project stands out.</p>
+            <a href="#" target="_blank" class="btn btn-small">View Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <div class="skill">
+          <img src="assets/html5.svg" alt="HTML5"/>
+          <span>HTML5</span>
+        </div>
+        <div class="skill">
+          <img src="assets/css3.svg" alt="CSS3"/>
+          <span>CSS3</span>
+        </div>
+        <div class="skill">
+          <img src="assets/js.svg" alt="JavaScript"/>
+          <span>JavaScript</span>
+        </div>
+        <div class="skill">
+          <img src="assets/react.svg" alt="React"/>
+          <span>React</span>
+        </div>
+        <!-- Add more skills as needed -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <form class="contact-form" action="mailto:your.email@example.com" method="POST" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required/>
+        <input type="email" name="email" placeholder="Your Email" required/>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+      <div class="social-links">
+        <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub">
+          <img src="assets/github.svg" alt="GitHub"/>
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn">
+          <img src="assets/linkedin.svg" alt="LinkedIn"/>
+        </a>
+        <!-- Add more social links as needed -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      &copy; <span id="year"></span> Your Name. Powered by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
+    </div>
+  </footer>
+
+  <!-- Animation & 3D Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script type="module" src="three-hero.js"></script>
+  <script>
+    // Typewriter Effect
+    const words = ["Developer.", "Designer.", "3D Creator."];
+    let i = 0, timer;
+    function typingEffect() {
+      let word = words[i].split("");
+      var loopTyping = function() {
+        if (word.length > 0) {
+          document.getElementById('typewriter').innerHTML += word.shift();
+        } else {
+          deletingEffect();
+          return false;
+        };
+        timer = setTimeout(loopTyping, 150);
+      };
+      loopTyping();
+    }
+    function deletingEffect() {
+      let word = words[i].split("");
+      var loopDeleting = function() {
+        if (word.length > 0) {
+          word.pop();
+          document.getElementById('typewriter').innerHTML = word.join("");
+        } else {
+          i = (i + 1) % words.length;
+          typingEffect();
+          return false;
+        };
+        timer = setTimeout(loopDeleting, 100);
+      };
+      setTimeout(loopDeleting, 1000);
+    }
+    typingEffect();
+
+    // Animate hero content on load with GSAP
+    gsap.from(".hero-content h1", {y: 80, opacity: 0, duration: 1.2, ease: "power3.out"});
+    gsap.from(".hero-content h2", {y: 60, opacity: 0, duration: 1, delay: 0.4, ease: "power3.out"});
+    gsap.from(".hero-content .btn", {scale: 0.7, opacity: 0, duration: 1, delay: 0.8, ease: "back.out(1.7)"});
+
+    // Animate sections on scroll
+    document.querySelectorAll('section').forEach(section => {
+      gsap.from(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out"
+      });
+    });
+
+    // Current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
